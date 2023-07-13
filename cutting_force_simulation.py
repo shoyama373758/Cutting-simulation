@@ -81,7 +81,7 @@ time_N = 100000
 
 h = float(time_T / time_N)
 
-for i in range(1000):
+for i in range(time_N):
     print(i)
     t = i * h
     time.append(t)

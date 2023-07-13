@@ -10,6 +10,7 @@ K_ac = 100
 K_te = 10
 K_re = 5
 K_ae = 0
+
 D = 2  # 工具直径（㎜）
 num_blades = 2  # 刃数
 twist_angle = 30  # ねじれ角（degree）
@@ -70,27 +71,38 @@ def calc_sum_cutting_force(theta_0):
     return F_x, F_y, F_z
 
 
+time = []
 Fx = []
 Fy = []
 Fz = []
-step = 0.01
-time = [n * step for n in range(1001)]  # ms
-print(time)
-for t in time:
-    theta_0 += np.degrees((rotation_speed / 60) * (t / 1000) * np.pi * 2)
+
+time_T = 10  # s
+time_N = 100000
+
+h = float(time_T / time_N)
+
+for i in range(1000):
+    print(i)
+    t = i * h
+    time.append(t)
+    theta_0 += np.degrees((rotation_speed / 60) * h * np.pi * 2)
     theta_0 %= 360
     F_x, F_y, F_z = calc_sum_cutting_force(theta_0)
     Fx.append(F_x)
     Fy.append(F_y)
     Fz.append(F_z)
-plt.plot(time, Fx, label="Fx")
-plt.plot(time, Fy, label="Fy")
-plt.plot(time, Fz, label="Fz")
-plt.xlabel("Time[s]")
-plt.ylabel("Cutting Force[N]")
-plt.title("Cutting Force and Time")
-plt.legend()
-plt.show()
+
+
+# plt.plot(time, Fx, label="Fx")
+# plt.plot(time, Fy, label="Fy")
+# plt.plot(time, Fz, label="Fz")
+# plt.xlabel("Time[s]")
+# plt.ylabel("Cutting Force[N]")
+# plt.title("Cutting Force and Time")
+# plt.legend()
+# plt.show()
+
+
 """
 degree = [n for n in range(361)]
 for j in degree:

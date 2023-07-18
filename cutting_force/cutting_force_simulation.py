@@ -61,7 +61,7 @@ def calc_sum_cutting_force(theta_0):
             angle_list_degree.append(angle_degree % 360)
         hitting_angle_list_degree = []
         for angle in angle_list_degree:
-            if angle >= 0 and angle <= 180:
+            if angle >= 0 and angle <= 180:  # アップカット、ダウンカットに応じて変更
                 hitting_angle_list_degree.append(angle)
         hitting_angle_list_radian = np.radians(hitting_angle_list_degree)
         temp_Fx, temp_Fy, temp_Fz = calc_cutting_force(hitting_angle_list_radian)
@@ -81,7 +81,7 @@ time_N = 100000
 
 h = float(time_T / time_N)
 
-for i in range(time_N):
+for i in range(300):
     print(i)
     t = i * h
     time.append(t)
@@ -93,31 +93,30 @@ for i in range(time_N):
     Fz.append(F_z)
 
 
-# plt.plot(time, Fx, label="Fx")
-# plt.plot(time, Fy, label="Fy")
-# plt.plot(time, Fz, label="Fz")
-# plt.xlabel("Time[s]")
-# plt.ylabel("Cutting Force[N]")
-# plt.title("Cutting Force and Time")
-# plt.legend()
-# plt.show()
-
-
-"""
-degree = [n for n in range(361)]
-for j in degree:
-    theta_0 = j
-    F_x, F_y, F_z = calc_sum_cutting_force(theta_0)
-    Fx.append(F_x)
-    Fy.append(F_y)
-    Fz.append(F_z)
-# 結果のプロット
-plt.plot(degree, Fx, label="Fx")
-plt.plot(degree, Fy, label="Fy")
-plt.plot(degree, Fz, label="Fz")
-plt.xlabel("Rotation angle")
-plt.ylabel("Cutting Force")
-plt.title("Cutting Force and Rotation Angle")
+plt.plot(time, Fx, label="Fx")
+plt.plot(time, Fy, label="Fy")
+plt.plot(time, Fz, label="Fz")
+plt.xlabel("Time[s]")
+plt.ylabel("Cutting Force[N]")
+plt.title("Cutting Force and Time")
 plt.legend()
 plt.show()
-"""
+
+
+# degree = [n for n in range(361)]
+# for j in degree:
+#     print(j)
+#     theta_0 = j
+#     F_x, F_y, F_z = calc_sum_cutting_force(theta_0)
+#     Fx.append(F_x)
+#     Fy.append(F_y)
+#     Fz.append(F_z)
+# # 結果のプロット
+# plt.plot(degree, Fx, label="Fx")
+# plt.plot(degree, Fy, label="Fy")
+# plt.plot(degree, Fz, label="Fz")
+# plt.xlabel("Rotation angle")
+# plt.ylabel("Cutting Force")
+# plt.title("Cutting Force and Rotation Angle")
+# plt.legend()
+# plt.show()
